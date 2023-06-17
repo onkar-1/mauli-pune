@@ -23,7 +23,7 @@ ls
 
     stage('prod') {
       steps {
-        build(job: 'choice', propagate: true, quietPeriod: 2, waitForStart: true)
+        echo 'om'
       }
     }
 
