@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+     tools {
+        maven 'Maven' 
+    }
+    stages {
+        stage('test') {
+            steps {
+                // mvn test
+                sh "mvn test"
+                echo 'Hello World'
+            }
+        }
+        stage('build') {
+            steps {
+                // mvn package
+                 sh "mvn package"
+                echo 'Hello World'
+            }
+        }
+        stage('depoly on test') {
+            steps {
+                // deploy on container -> plugin
+                deploy adapters: [tomcat9(credentialsId: 'tomcatserver', path: '', url: 'http://52.221.244.233:8000')], contextPath: '/app', war: '**/*.war'
+                
+                echo 'Hello World'
+            }
+        }
+        stage('deploy on prod') {
+            steps {
+                // deploy on container -> plugin
+                echo 'Hello World'
+            }
+        }
+    }   
+}
